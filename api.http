@@ -1,0 +1,66 @@
+@token= Bearer eyJhbGciOiJIUzI1NiJ9.VmlrcmFtSmVldFNpbmdoSkk.MaACpq-fK6F02rVz3vEAUgAYvTqDAEVKpq9zNbmWCPs
+@ip = http://localhost:3333/
+
+//////////////// Create Agency ///////////////
+POST {{ip}}agency/create HTTP/1.1
+Content-type: application/json
+Authorization: {{token}}
+
+{
+    "AgencyName":"Test A",
+    "Address1":"A 1",
+    "Address2":"A 2",
+    "PhoneNumber":"9802953333",
+    "State":"S",
+    "City":"C",
+    "ClientName":"CN",
+    "Email":"mail@gmail.com",
+    "ClientPhoneNumber":"9802953334",
+    "TotalBill":"1234"
+};
+
+#################Create Client ##############
+POST {{ip}}client/create HTTP/1.1
+Content-type: application/json
+Authorization: {{token}}
+
+{
+    "AgencyId":"61da9d3c44d7c812547d7c47",
+    "Name":"Test A",
+    "PhoneNumber":"9802953333",
+    "Email":"mail@gmail.com",
+    "TotalBill":"1234"
+}
+
+################# Update Client ####################
+POST {{ip}}client/update HTTP/1.1
+Content-type: application/json
+Authorization: {{token}}
+
+{
+    "_id":"61da9d3c44d7c812547d7c49",
+    "AgencyId":"61da9d3c44d7c812547d7c47",
+    "Name":"Test A",
+    "PhoneNumber":"9802953333",
+    "Email":"mail@gmail.com",
+    "TotalBill":"1234"
+}
+############### Get Top Clients With AgencyName ####################
+
+POST {{ip}}agency/topBilling HTTP/1.1
+Content-type: application/json
+Authorization: {{token}}
+
+{
+    "clientCount":"2"
+}
+################### Api To Get Agency Details with Top Clients of Agency ####################
+
+POST {{ip}}agency/details HTTP/1.1
+Content-type: application/json
+Authorization: {{token}}
+
+{
+    "_id":"61da9d3c44d7c812547d7c47",
+    "clientCount": 4
+}
